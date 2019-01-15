@@ -37,14 +37,7 @@ class AddEmailToQueueService
      */
     public function add(EmailModelInterface $emailModel)
     {
-        if (! $emailModel->fromEmail() ||
-            ! $emailModel->toEmail() ||
-            ! $emailModel->subject()
-        ) {
-            throw new InvalidEmailModelException();
-        }
-
-        if (! $emailModel->messagePlainText() && ! $emailModel->messageHtml()) {
+        if (! $emailModel->isValid()) {
             throw new InvalidEmailModelException();
         }
 

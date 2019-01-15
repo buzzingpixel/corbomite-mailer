@@ -65,4 +65,10 @@ interface EmailModelInterface
      * @return string
      */
     public function messageHtml(?string $messageHtml = null): string;
+
+    /**
+     * Checks whether the model has all it needs to send an email
+     * @return bool
+     */
+    public function isValid(): bool;
 }

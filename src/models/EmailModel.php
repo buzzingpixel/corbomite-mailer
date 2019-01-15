@@ -68,4 +68,19 @@ class EmailModel implements EmailModelInterface
     {
         return $this->messageHtml = $messageHtml !== null ? $messageHtml : $this->messageHtml;
     }
+
+    public function isValid(): bool
+    {
+        if (! $this->toEmail() ||
+            ! $this->subject()
+        ) {
+            return false;
+        }
+
+        if (! $this->messagePlainText() && ! $this->messageHtml()) {
+            return false;
+        }
+
+        return true;
+    }
 }

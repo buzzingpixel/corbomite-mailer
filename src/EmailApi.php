@@ -42,7 +42,9 @@ class EmailApi implements EmailApiInterface
     {
         /** @noinspection PhpUnhandledExceptionInspection */
         /** @var SendMailAdapterInterface $adapter */
-        $adapter = Di::get(getenv('CORBOMITE_MAILER_ADAPTER_CLASS'));
+        $adapter = $this->di->makeFromDefinition(
+            getenv('CORBOMITE_MAILER_ADAPTER_CLASS')
+        );
         $adapter->send($emailModel);
     }
 }

@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 use corbomite\di\Di;
 use corbomite\cli\Kernel;
+use buzzingpixel\corbomitemailer\EmailApi;
 
 define('ENTRY_POINT', 'app');
 define('APP_BASE_PATH', __DIR__);
@@ -23,6 +24,22 @@ putenv('CORBOMITE_DB_DATA_NAMESPACE=corbomite\corbomitemailer\data');
 putenv('CORBOMITE_DB_DATA_DIRECTORY=./src/data');
 
 require APP_VENDOR_PATH . '/autoload.php';
+
+if (file_exists(APP_BASE_PATH . '/.env')) {
+    (new Dotenv\Dotenv(APP_BASE_PATH))->load();
+}
+
+// $emailApi = Di::get(EmailApi::class);
+// $emailApi->addEmailToQueue($emailApi->createEmailModel([
+//     'fromName' => 'Jim Kirk',
+//     'fromEmail' => 'jkirk@starfleet.com',
+//     'toName' => 'TJ Draper',
+//     'toEmail' => 'tj@buzzingpixel.com',
+//     'subject' => 'Test Email',
+//     'messagePlainText' => 'This is a test.',
+//     'messageHtml' => '<p>This is a test.</p>',
+// ]));
+// die;
 
 /** @noinspection PhpUnhandledExceptionInspection */
 Di::get(Kernel::class)($argv);
