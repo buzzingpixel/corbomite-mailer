@@ -11,7 +11,7 @@ namespace buzzingpixel\corbomitemailer\interfaces;
 
 use buzzingpixel\corbomitemailer\exceptions\InvalidEmailModelException;
 
-interface SendEmailInterface
+interface SendMailAdapterInterface
 {
     /**
      * Sends the email
