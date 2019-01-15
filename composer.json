@@ -13,7 +13,11 @@
         "php": ">=7.1",
         "buzzingpixel/corbomite-di": "^1.0",
         "buzzingpixel/corbomite-queue": "^1.0",
-        "buzzingpixel/corbomite-db": "^1.0"
+        "buzzingpixel/corbomite-db": "^1.0",
+        "sendgrid/sendgrid": "^7.2",
+        "mandrill/mandrill": "^1.0",
+        "mailgun/mailgun-php": "^2.8",
+        "wildbit/postmark-php": "^2.6"
     },
     "require-dev": {
         "roave/security-advisories": "dev-master",
