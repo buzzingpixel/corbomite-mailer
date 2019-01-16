@@ -15,7 +15,7 @@ use buzzingpixel\corbomitemailer\interfaces\EmailModelInterface;
 use buzzingpixel\corbomitemailer\interfaces\SendMailAdapterInterface;
 use buzzingpixel\corbomitemailer\exceptions\InvalidEmailModelException;
 
-class MandrillMailAdapter implements SendMailAdapterInterface
+class MandrillSendMailAdapter implements SendMailAdapterInterface
 {
     private $mandrill;
     private $html2TextFactory;

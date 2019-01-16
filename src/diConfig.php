@@ -12,8 +12,8 @@ use corbomite\queue\QueueApi;
 use SendGrid\Mail\Mail as SendGridMail;
 use buzzingpixel\corbomitemailer\EmailApi;
 use buzzingpixel\corbomitemailer\factories\Html2TextFactory;
-use buzzingpixel\corbomitemailer\adapters\MandrillMailAdapter;
 use buzzingpixel\corbomitemailer\services\AddEmailToQueueService;
+use buzzingpixel\corbomitemailer\adapters\MandrillSendMailAdapter;
 use buzzingpixel\corbomitemailer\adapters\SendGridSendMailAdapter;
 use buzzingpixel\corbomitemailer\services\SendEmailFromQueueService;
 
@@ -34,8 +34,8 @@ return [
             new Html2TextFactory()
         );
     },
-    MandrillMailAdapter::class => function () {
-        return new MandrillMailAdapter(
+    MandrillSendMailAdapter::class => function () {
+        return new MandrillSendMailAdapter(
             new Mandrill(getenv('MANDRILL_API_KEY')),
             new Html2TextFactory()
         );
