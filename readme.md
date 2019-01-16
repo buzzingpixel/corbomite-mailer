@@ -22,6 +22,7 @@ For desirability, emails are ways sent from the the webmaster email. Be sure to 
 To set what adapter the mailer uses, make sure to set the `CORBOMITE_MAILER_ADAPTER_CLASS` environment variable to a fully qualified class name of one of an adapter. The built in adapters are:
 
 - `buzzingpixel\corbomitemailer\adapters\SendGridSendMailAdapter`
+- `buzzingpixel\corbomitemailer\adapters\MandrillMailAdapter`
 
 You can also write your own adapter. It must implement `buzzingpixel\corbomitemailer\interfaces\SendMailAdapterInterface`.
 
@@ -30,6 +31,10 @@ You can also write your own adapter. It must implement `buzzingpixel\corbomitema
 #### SendGridSendMailAdapter
 
 To use the `SendGridSendMailAdapter`, be sure to set the `SENDGRID_API_KEY` environment variable.
+
+#### MandrillMailAdapter
+
+To use the `MandrillMailAdapter`, be sure to set the `MANDRILL_API_KEY` environment variable.
 
 ### Sending email
 
