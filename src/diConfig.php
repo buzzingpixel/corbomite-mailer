@@ -8,10 +8,12 @@ declare(strict_types=1);
  */
 
 use corbomite\di\Di;
+use Mailgun\Mailgun;
 use corbomite\queue\QueueApi;
 use SendGrid\Mail\Mail as SendGridMail;
 use buzzingpixel\corbomitemailer\EmailApi;
 use buzzingpixel\corbomitemailer\factories\Html2TextFactory;
+use buzzingpixel\corbomitemailer\adapters\MailGunSendMailAdapter;
 use buzzingpixel\corbomitemailer\services\AddEmailToQueueService;
 use buzzingpixel\corbomitemailer\adapters\MandrillSendMailAdapter;
 use buzzingpixel\corbomitemailer\adapters\SendGridSendMailAdapter;
@@ -37,6 +39,12 @@ return [
     MandrillSendMailAdapter::class => function () {
         return new MandrillSendMailAdapter(
             new Mandrill(getenv('MANDRILL_API_KEY')),
+            new Html2TextFactory()
+        );
+    },
+    MailGunSendMailAdapter::class => function () {
+        return new MailGunSendMailAdapter(
+            Mailgun::create(getenv('MAILGUN_API_KEY')),
             new Html2TextFactory()
         );
     },

@@ -18,7 +18,8 @@
         "mandrill/mandrill": "^1.0",
         "mailgun/mailgun-php": "^2.8",
         "wildbit/postmark-php": "^2.6",
-        "html2text/html2text": "^4.2"
+        "html2text/html2text": "^4.2",
+        "php-http/guzzle6-adapter": "^1.1.1"
     },
     "require-dev": {
         "roave/security-advisories": "dev-master",

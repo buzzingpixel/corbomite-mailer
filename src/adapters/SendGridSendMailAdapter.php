@@ -55,14 +55,14 @@ class SendGridSendMailAdapter implements SendMailAdapterInterface
             $emailModel->toName() ?? null
         );
 
+        $this->mail->setSubject($emailModel->subject());
+
         if (! $emailModel->messagePlainText()) {
             $emailModel->messagePlainText(
                 $this->html2TextFactory->make($emailModel->messageHtml())
                     ->getText()
             );
         }
-
-        $this->mail->setSubject($emailModel->subject());
 
         $this->mail->addContent('text/plain', $emailModel->messagePlainText());
 

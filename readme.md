@@ -23,6 +23,7 @@ To set what adapter the mailer uses, make sure to set the `CORBOMITE_MAILER_ADAP
 
 - `buzzingpixel\corbomitemailer\adapters\SendGridSendMailAdapter`
 - `buzzingpixel\corbomitemailer\adapters\MandrillMailSendMailAdapter`
+- `buzzingpixel\corbomitemailer\adapters\MailGunSendMailAdapter`
 
 You can also write your own adapter. It must implement `buzzingpixel\corbomitemailer\interfaces\SendMailAdapterInterface`.
 
@@ -35,6 +36,10 @@ To use the `SendGridSendMailAdapter`, be sure to set the `SENDGRID_API_KEY` envi
 #### MandrillMailSendMailAdapter
 
 To use the `MandrillMailSendMailAdapter`, be sure to set the `MANDRILL_API_KEY` environment variable.
+
+### MailGunSendMailAdapter
+
+To use the `MailGunSendMailAdapter`, be sure to set the `MAILGUN_API_KEY` and `MAILGUN_DOMAIN` environment variables.
 
 ### Sending email
 
