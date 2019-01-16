@@ -24,6 +24,7 @@ To set what adapter the mailer uses, make sure to set the `CORBOMITE_MAILER_ADAP
 - `buzzingpixel\corbomitemailer\adapters\SendGridSendMailAdapter`
 - `buzzingpixel\corbomitemailer\adapters\MandrillMailSendMailAdapter`
 - `buzzingpixel\corbomitemailer\adapters\MailGunSendMailAdapter`
+- `buzzingpixel\corbomitemailer\adapters\PostMarkSendMailAdapter`
 
 You can also write your own adapter. It must implement `buzzingpixel\corbomitemailer\interfaces\SendMailAdapterInterface`.
 
@@ -40,6 +41,10 @@ To use the `MandrillMailSendMailAdapter`, be sure to set the `MANDRILL_API_KEY` 
 ### MailGunSendMailAdapter
 
 To use the `MailGunSendMailAdapter`, be sure to set the `MAILGUN_API_KEY` and `MAILGUN_DOMAIN` environment variables.
+
+### PostMarkSendMailAdapter
+
+To use the `PostMarkSendMailAdapter`, be sure to set the `POSTMARK_SERVER_TOKEN` environment variable.
 
 ### Sending email
 

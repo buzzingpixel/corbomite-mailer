@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 use corbomite\di\Di;
 use Mailgun\Mailgun;
+use Postmark\PostmarkClient;
 use corbomite\queue\QueueApi;
 use SendGrid\Mail\Mail as SendGridMail;
 use buzzingpixel\corbomitemailer\EmailApi;
@@ -17,6 +18,7 @@ use buzzingpixel\corbomitemailer\adapters\MailGunSendMailAdapter;
 use buzzingpixel\corbomitemailer\services\AddEmailToQueueService;
 use buzzingpixel\corbomitemailer\adapters\MandrillSendMailAdapter;
 use buzzingpixel\corbomitemailer\adapters\SendGridSendMailAdapter;
+use buzzingpixel\corbomitemailer\adapters\PostMarkSendMailAdapter;
 use buzzingpixel\corbomitemailer\services\SendEmailFromQueueService;
 
 return [
@@ -45,6 +47,12 @@ return [
     MailGunSendMailAdapter::class => function () {
         return new MailGunSendMailAdapter(
             Mailgun::create(getenv('MAILGUN_API_KEY')),
+            new Html2TextFactory()
+        );
+    },
+    PostMarkSendMailAdapter::class => function () {
+        return new PostMarkSendMailAdapter(
+            new PostmarkClient(getenv('POSTMARK_SERVER_TOKEN')),
             new Html2TextFactory()
         );
     },
