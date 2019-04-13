@@ -37,6 +37,7 @@ class SendGridSendMailAdapter implements SendMailAdapterInterface
             throw new InvalidEmailModelException();
         }
 
+        /** @noinspection PhpUnhandledExceptionInspection */
         $this->mail->setFrom(
             getenv('WEBMASTER_EMAIL_ADDRESS'),
             getenv('WEBMASTER_NAME')
