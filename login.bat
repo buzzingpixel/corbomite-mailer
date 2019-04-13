@@ -6,4 +6,4 @@ if "%1" == "" (
     set ENV=%1
 )
 
-docker exec -it --user root %ENV%-corbomite-mailer bash
+docker exec -it --user root %ENV%-corbomite-flash-data bash
