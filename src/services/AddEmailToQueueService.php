@@ -40,18 +40,19 @@ class AddEmailToQueueService
             $this->queueApi->makeActionQueueBatchModel([
                 'name' => 'corbomite-mailer',
                 'title' => 'Corbomite Mailer',
-                'items' => [$this->queueApi->makeActionQueueItemModel([
-                    'class' => SendEmailFromQueueService::class,
-                    'context' => [
-                        'fromName' => $emailModel->fromName(),
-                        'fromEmail' => $emailModel->fromEmail(),
-                        'toName' => $emailModel->toName(),
-                        'toEmail' => $emailModel->toEmail(),
-                        'subject' => $emailModel->subject(),
-                        'messagePlainText' => $emailModel->messagePlainText(),
-                        'messageHtml' => $emailModel->messageHtml(),
-                    ],
-                ]),
+                'items' => [
+                    $this->queueApi->makeActionQueueItemModel([
+                        'class' => SendEmailFromQueueService::class,
+                        'context' => [
+                            'fromName' => $emailModel->fromName(),
+                            'fromEmail' => $emailModel->fromEmail(),
+                            'toName' => $emailModel->toName(),
+                            'toEmail' => $emailModel->toEmail(),
+                            'subject' => $emailModel->subject(),
+                            'messagePlainText' => $emailModel->messagePlainText(),
+                            'messageHtml' => $emailModel->messageHtml(),
+                        ],
+                    ]),
                 ],
             ])
         );
