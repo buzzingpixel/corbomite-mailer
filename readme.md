@@ -1,5 +1,7 @@
 # Corbomite Mailer
 
+<p><a href="https://travis-ci.org/buzzingpixel/corbomite-mailer"><img src="https://travis-ci.org/buzzingpixel/corbomite-mailer.svg?branch=master"></a></p>
+
 Part of BuzzingPixel's Corbomite project.
 
 Provides transaction email capabilities.
