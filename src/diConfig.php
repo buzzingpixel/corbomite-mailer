@@ -14,6 +14,7 @@ use corbomite\queue\QueueApi;
 use SendGrid\Mail\Mail as SendGridMail;
 use buzzingpixel\corbomitemailer\EmailApi;
 use buzzingpixel\corbomitemailer\factories\Html2TextFactory;
+use buzzingpixel\corbomitemailer\interfaces\EmailApiInterface;
 use buzzingpixel\corbomitemailer\adapters\MailGunSendMailAdapter;
 use buzzingpixel\corbomitemailer\services\AddEmailToQueueService;
 use buzzingpixel\corbomitemailer\adapters\MandrillSendMailAdapter;
@@ -25,11 +26,18 @@ return [
     EmailApi::class => function () {
         return new EmailApi(new Di());
     },
+    EmailApiInterface::class => function () {
+        return Di::get(EmailApi::class);
+    },
     AddEmailToQueueService::class => function () {
-        return new AddEmailToQueueService(Di::get(QueueApi::class));
+        return new AddEmailToQueueService(
+            Di::get(QueueApi::class)
+        );
     },
     SendEmailFromQueueService::class => function () {
-        return new SendEmailFromQueueService(Di::get(EmailApi::class));
+        return new SendEmailFromQueueService(
+            Di::get(EmailApiInterface::class)
+        );
     },
     SendGridSendMailAdapter::class => function () {
         return new SendGridSendMailAdapter(

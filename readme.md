@@ -12,14 +12,14 @@ The Mailer makes use of the Corobomite Queue feature so be sure you have the que
 
 ### Webmaster From and Email environment variables
 
-For desirability, emails are ways sent from the the webmaster email. Be sure to set the following environment variables:
+For deliverability, emails are ways sent from the the webmaster email. Be sure to set the following environment variables:
 
 - `WEBMASTER_EMAIL_ADDRESS=info@mysite.com`
 - `WEBMASTER_NAME="Some Name"`
 
 ### CORBOMITE_MAILER_ADAPTER_CLASS environment variable
 
-To set what adapter the mailer uses, make sure to set the `CORBOMITE_MAILER_ADAPTER_CLASS` environment variable to a fully qualified class name of one of an adapter. The built in adapters are:
+To set what adapter the mailer uses, make sure to set the `CORBOMITE_MAILER_ADAPTER_CLASS` environment variable to a fully qualified class name of an adapter. The built-in adapters are:
 
 - `buzzingpixel\corbomitemailer\adapters\SendGridSendMailAdapter`
 - `buzzingpixel\corbomitemailer\adapters\MandrillMailSendMailAdapter`
@@ -28,7 +28,7 @@ To set what adapter the mailer uses, make sure to set the `CORBOMITE_MAILER_ADAP
 
 You can also write your own adapter. It must implement `buzzingpixel\corbomitemailer\interfaces\SendMailAdapterInterface`.
 
-### Adapter Environment variables
+### Built-in Adapter Environment variables
 
 #### SendGridSendMailAdapter
 
@@ -53,9 +53,14 @@ To use the `PostMarkSendMailAdapter`, be sure to set the `POSTMARK_SERVER_TOKEN`
 declare(strict_types=1);
 
 use corbomite\di\Di;
-use buzzingpixel\corbomitemailer\EmailApi;
+use buzzingpixel\corbomitemailer\interfaces\EmailApiInterface;
 
-$emailApi = Di::get(EmailApi::class);
+/**
+ * Requesting the EmailApiInterface will return an instance of \buzzingpixel\corbomitemailer\EmailApi
+ * You can override it with your own implementation by setting to return value of PHP-DI for
+ * the interface to your own implementation
+ */
+$emailApi = Di::diContainer()->get(EmailApiInterface::class);
 
 $emailModel = $this->emailApi->createEmailModel([
     'fromName' => 'Some Name', // Optional, fromEmail must be set
