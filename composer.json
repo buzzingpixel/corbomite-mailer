@@ -1,6 +1,6 @@
 {
     "name": "buzzingpixel/corbomite-mailer",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "license": "Apache-2.0",
     "description": "Corbomite Mailer",
     "authors": [
@@ -12,15 +12,15 @@
     ],
     "require": {
         "php": ">=7.2",
+        "buzzingpixel/corbomite-db": "^1.0",
         "buzzingpixel/corbomite-di": "^1.0",
         "buzzingpixel/corbomite-queue": "^1.0",
-        "buzzingpixel/corbomite-db": "^1.0",
-        "sendgrid/sendgrid": "^7.2",
-        "mandrill/mandrill": "^1.0",
-        "mailgun/mailgun-php": "^2.8",
-        "wildbit/postmark-php": "^2.6",
         "html2text/html2text": "^4.2",
-        "php-http/guzzle6-adapter": "^1.1.1"
+        "mailgun/mailgun-php": "^2.8",
+        "mandrill/mandrill": "^1.0",
+        "php-http/guzzle6-adapter": "^1.1.1",
+        "sendgrid/sendgrid": "^7.2",
+        "wildbit/postmark-php": "^2.6"
     },
     "require-dev": {
         "buzzingpixel/corbomite-cli": "^1.0",
