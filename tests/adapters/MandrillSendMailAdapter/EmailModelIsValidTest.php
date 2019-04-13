@@ -13,7 +13,7 @@ use Mandrill_Messages;
 use PHPUnit\Framework\TestCase;
 use Throwable;
 
-class EmailModelIsValidTestTest extends TestCase
+class EmailModelIsValidTest extends TestCase
 {
     /**
      * @throws Throwable

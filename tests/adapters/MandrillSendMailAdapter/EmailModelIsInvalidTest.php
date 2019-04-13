@@ -12,7 +12,7 @@ use Mandrill;
 use PHPUnit\Framework\TestCase;
 use Throwable;
 
-class EmailModelIsInvalidTestTest extends TestCase
+class EmailModelIsInvalidTest extends TestCase
 {
     /**
      * @throws Throwable
