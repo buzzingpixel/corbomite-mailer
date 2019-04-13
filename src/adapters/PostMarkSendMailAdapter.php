@@ -1,34 +1,32 @@
 <?php
-declare(strict_types=1);
 
-/**
- * @author TJ Draper <tj@buzzingpixel.com>
- * @copyright 2019 BuzzingPixel, LLC
- * @license Apache-2.0
- */
+declare(strict_types=1);
 
 namespace buzzingpixel\corbomitemailer\adapters;
 
-use Postmark\PostmarkClient;
+use buzzingpixel\corbomitemailer\exceptions\InvalidEmailModelException;
 use buzzingpixel\corbomitemailer\factories\Html2TextFactory;
 use buzzingpixel\corbomitemailer\interfaces\EmailModelInterface;
 use buzzingpixel\corbomitemailer\interfaces\SendMailAdapterInterface;
-use buzzingpixel\corbomitemailer\exceptions\InvalidEmailModelException;
+use Postmark\PostmarkClient;
+use function getenv;
 
 class PostMarkSendMailAdapter implements SendMailAdapterInterface
 {
+    /** @var PostmarkClient */
     private $postMark;
+    /** @var Html2TextFactory */
     private $html2TextFactory;
 
     public function __construct(
         PostmarkClient $postMark,
         Html2TextFactory $html2TextFactory
     ) {
-        $this->postMark = $postMark;
+        $this->postMark         = $postMark;
         $this->html2TextFactory = $html2TextFactory;
     }
 
-    public function send(EmailModelInterface $emailModel)
+    public function send(EmailModelInterface $emailModel) : void
     {
         if (! $emailModel->isValid()) {
             throw new InvalidEmailModelException();

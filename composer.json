@@ -1,6 +1,7 @@
 {
     "name": "buzzingpixel/corbomite-mailer",
-    "version": "1.0.0",
+    "version": "1.1.0",
+    "license": "Apache-2.0",
     "description": "Corbomite Mailer",
     "authors": [
         {
@@ -10,23 +11,26 @@
         }
     ],
     "require": {
-        "php": ">=7.1",
+        "php": ">=7.2",
+        "buzzingpixel/corbomite-db": "^1.0",
         "buzzingpixel/corbomite-di": "^1.0",
         "buzzingpixel/corbomite-queue": "^1.0",
-        "buzzingpixel/corbomite-db": "^1.0",
-        "sendgrid/sendgrid": "^7.2",
-        "mandrill/mandrill": "^1.0",
-        "mailgun/mailgun-php": "^2.8",
-        "wildbit/postmark-php": "^2.6",
         "html2text/html2text": "^4.2",
-        "php-http/guzzle6-adapter": "^1.1.1"
+        "mailgun/mailgun-php": "^2.8",
+        "mandrill/mandrill": "^1.0",
+        "php-http/guzzle6-adapter": "^1.1.1",
+        "sendgrid/sendgrid": "^7.2",
+        "wildbit/postmark-php": "^2.6"
     },
     "require-dev": {
+        "buzzingpixel/corbomite-cli": "^1.0",
+        "codedungeon/phpunit-result-printer": "^0.26.2",
+        "doctrine/coding-standard": "^6.0",
+        "friendsofphp/php-cs-fixer": "^2.14",
+        "phpmd/phpmd": "^2.6",
+        "phpunit/phpunit": "^8.1",
         "roave/security-advisories": "dev-master",
         "squizlabs/php_codesniffer": "^3.4",
-        "phpmd/phpmd": "^2.6",
-        "phpunit/phpunit": "^7.5",
-        "buzzingpixel/corbomite-cli": "^1.0",
         "vlucas/phpdotenv": "^2.5"
     },
     "autoload": {
@@ -38,6 +42,11 @@
         "psr-4": {
             "buzzingpixel\\tests\\": "tests/"
         }
+    },
+    "config": {
+        "bin-compat": "full",
+        "optimize-autoloader": true,
+        "sort-packages": true
     },
     "extra": {
         "diConfigFilePath": "src/diConfig.php"

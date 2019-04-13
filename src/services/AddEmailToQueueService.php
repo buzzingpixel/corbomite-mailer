@@ -1,41 +1,35 @@
 <?php
-declare(strict_types=1);
 
-/**
- * @author TJ Draper <tj@buzzingpixel.com>
- * @copyright 2019 BuzzingPixel, LLC
- * @license Apache-2.0
- */
+declare(strict_types=1);
 
 namespace buzzingpixel\corbomitemailer\services;
 
-use corbomite\queue\QueueApi;
-use buzzingpixel\corbomitemailer\interfaces\EmailModelInterface;
 use buzzingpixel\corbomitemailer\exceptions\InvalidEmailModelException;
+use buzzingpixel\corbomitemailer\interfaces\EmailModelInterface;
+use corbomite\queue\interfaces\QueueApiInterface;
 
 class AddEmailToQueueService
 {
+    /** @var QueueApiInterface */
     private $queueApi;
 
-    public function __construct(QueueApi $queueApi)
+    public function __construct(QueueApiInterface $queueApi)
     {
         $this->queueApi = $queueApi;
     }
 
     /**
-     * @param EmailModelInterface $emailModel
      * @throws InvalidEmailModelException
      */
-    public function __invoke(EmailModelInterface $emailModel)
+    public function __invoke(EmailModelInterface $emailModel) : void
     {
         $this->add($emailModel);
     }
 
     /**
-     * @param EmailModelInterface $emailModel
      * @throws InvalidEmailModelException
      */
-    public function add(EmailModelInterface $emailModel)
+    public function add(EmailModelInterface $emailModel) : void
     {
         if (! $emailModel->isValid()) {
             throw new InvalidEmailModelException();
@@ -58,8 +52,8 @@ class AddEmailToQueueService
                             'messagePlainText' => $emailModel->messagePlainText(),
                             'messageHtml' => $emailModel->messageHtml(),
                         ],
-                    ])
-                ]
+                    ]),
+                ],
             ])
         );
     }

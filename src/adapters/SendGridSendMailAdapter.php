@@ -1,25 +1,24 @@
 <?php
-declare(strict_types=1);
 
-/**
- * @author TJ Draper <tj@buzzingpixel.com>
- * @copyright 2019 BuzzingPixel, LLC
- * @license Apache-2.0
- */
+declare(strict_types=1);
 
 namespace buzzingpixel\corbomitemailer\adapters;
 
-use SendGrid;
-use SendGrid\Mail\Mail;
+use buzzingpixel\corbomitemailer\exceptions\InvalidEmailModelException;
 use buzzingpixel\corbomitemailer\factories\Html2TextFactory;
 use buzzingpixel\corbomitemailer\interfaces\EmailModelInterface;
 use buzzingpixel\corbomitemailer\interfaces\SendMailAdapterInterface;
-use buzzingpixel\corbomitemailer\exceptions\InvalidEmailModelException;
+use SendGrid;
+use SendGrid\Mail\Mail;
+use function getenv;
 
 class SendGridSendMailAdapter implements SendMailAdapterInterface
 {
+    /** @var Mail */
     private $mail;
+    /** @var SendGrid */
     private $sendGrid;
+    /** @var Html2TextFactory */
     private $html2TextFactory;
 
     public function __construct(
@@ -27,17 +26,18 @@ class SendGridSendMailAdapter implements SendMailAdapterInterface
         SendGrid $sendGrid,
         Html2TextFactory $html2TextFactory
     ) {
-        $this->mail = $mail;
-        $this->sendGrid = $sendGrid;
+        $this->mail             = $mail;
+        $this->sendGrid         = $sendGrid;
         $this->html2TextFactory = $html2TextFactory;
     }
 
-    public function send(EmailModelInterface $emailModel)
+    public function send(EmailModelInterface $emailModel) : void
     {
         if (! $emailModel->isValid()) {
             throw new InvalidEmailModelException();
         }
 
+        /** @noinspection PhpUnhandledExceptionInspection */
         $this->mail->setFrom(
             getenv('WEBMASTER_EMAIL_ADDRESS'),
             getenv('WEBMASTER_NAME')
@@ -71,9 +71,5 @@ class SendGridSendMailAdapter implements SendMailAdapterInterface
         }
 
         $this->sendGrid->send($this->mail);
-        // $response = $this->sendGrid->send($this->mail);
-        // print $response->statusCode() . "\n";
-        // print_r($response->headers());
-        // print $response->body() . "\n";
     }
 }

@@ -1,11 +1,6 @@
 <?php
-declare(strict_types=1);
 
-/**
- * @author TJ Draper <tj@buzzingpixel.com>
- * @copyright 2019 BuzzingPixel, LLC
- * @license Apache-2.0
- */
+declare(strict_types=1);
 
 namespace buzzingpixel\corbomitemailer\interfaces;
 
@@ -15,21 +10,25 @@ interface EmailApiInterface
 {
     /**
      * Creates an email model
-     * @param array $props
-     * @return EmailModelInterface
+     *
+     * @param mixed[] $props
      */
-    public function createEmailModel(array $props = []): EmailModelInterface;
+    public function createEmailModel(array $props = []) : EmailModelInterface;
 
     /**
      * Adds an email to the queue
-     * @param EmailModelInterface $emailModel
+     *
+     * @return mixed
+     *
      * @throws InvalidEmailModelException
      */
     public function addEmailToQueue(EmailModelInterface $emailModel);
 
     /**
      * Sends an email right away
-     * @param EmailModelInterface $emailModel
+     *
+     * @return mixed
+     *
      * @throws InvalidEmailModelException
      */
     public function sendEmail(EmailModelInterface $emailModel);

@@ -1,34 +1,32 @@
 <?php
-declare(strict_types=1);
 
-/**
- * @author TJ Draper <tj@buzzingpixel.com>
- * @copyright 2019 BuzzingPixel, LLC
- * @license Apache-2.0
- */
+declare(strict_types=1);
 
 namespace buzzingpixel\corbomitemailer\adapters;
 
-use Mailgun\Mailgun;
+use buzzingpixel\corbomitemailer\exceptions\InvalidEmailModelException;
 use buzzingpixel\corbomitemailer\factories\Html2TextFactory;
 use buzzingpixel\corbomitemailer\interfaces\EmailModelInterface;
 use buzzingpixel\corbomitemailer\interfaces\SendMailAdapterInterface;
-use buzzingpixel\corbomitemailer\exceptions\InvalidEmailModelException;
+use Mailgun\Mailgun;
+use function getenv;
 
 class MailGunSendMailAdapter implements SendMailAdapterInterface
 {
+    /** @var Mailgun */
     private $mailgun;
+    /** @var Html2TextFactory */
     private $html2TextFactory;
 
     public function __construct(
         Mailgun $mailgun,
         Html2TextFactory $html2TextFactory
     ) {
-        $this->mailgun = $mailgun;
+        $this->mailgun          = $mailgun;
         $this->html2TextFactory = $html2TextFactory;
     }
 
-    public function send(EmailModelInterface $emailModel)
+    public function send(EmailModelInterface $emailModel) : void
     {
         if (! $emailModel->isValid()) {
             throw new InvalidEmailModelException();
@@ -59,11 +57,6 @@ class MailGunSendMailAdapter implements SendMailAdapterInterface
             $message['html'] = $emailModel->messageHtml();
         }
 
-        try {
-            $this->mailgun->messages()->send(getenv('MAILGUN_DOMAIN'), $message);
-        } catch (\Throwable $e) {
-            var_dump($e->getMessage());
-            die;
-        }
+        $this->mailgun->messages()->send(getenv('MAILGUN_DOMAIN'), $message);
     }
 }

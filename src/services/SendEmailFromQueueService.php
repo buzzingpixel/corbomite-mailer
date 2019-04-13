@@ -1,19 +1,15 @@
 <?php
-declare(strict_types=1);
 
-/**
- * @author TJ Draper <tj@buzzingpixel.com>
- * @copyright 2019 BuzzingPixel, LLC
- * @license Apache-2.0
- */
+declare(strict_types=1);
 
 namespace buzzingpixel\corbomitemailer\services;
 
-use buzzingpixel\corbomitemailer\interfaces\EmailApiInterface;
 use buzzingpixel\corbomitemailer\exceptions\InvalidEmailModelException;
+use buzzingpixel\corbomitemailer\interfaces\EmailApiInterface;
 
 class SendEmailFromQueueService
 {
+    /** @var EmailApiInterface */
     private $emailApi;
 
     public function __construct(EmailApiInterface $emailApi)
@@ -22,10 +18,11 @@ class SendEmailFromQueueService
     }
 
     /**
-     * @param $context
+     * @param mixed[] $context
+     *
      * @throws InvalidEmailModelException
      */
-    public function __invoke($context)
+    public function __invoke(array $context) : void
     {
         $this->emailApi->sendEmail($this->emailApi->createEmailModel([
             'fromName' => $context['fromName'],
