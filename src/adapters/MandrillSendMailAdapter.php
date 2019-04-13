@@ -46,7 +46,7 @@ class MandrillSendMailAdapter implements SendMailAdapterInterface
             'from_name' => getenv('WEBMASTER_NAME'),
             'to' => [[
                 'email' => $emailModel->toEmail(),
-                'name' => $emailModel->toName() ?? $emailModel->toEmail(),
+                'name' => $emailModel->toName() ?: $emailModel->toEmail(),
                 'type' => 'to',
             ],
             ],
@@ -75,6 +75,7 @@ class MandrillSendMailAdapter implements SendMailAdapterInterface
             ];
         }
 
+        /** @noinspection PhpParamsInspection */
         $this->mandrill->messages->send($message);
     }
 }

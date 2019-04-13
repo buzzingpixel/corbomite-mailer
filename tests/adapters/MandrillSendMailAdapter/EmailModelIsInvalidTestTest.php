@@ -2,24 +2,24 @@
 
 declare(strict_types=1);
 
-namespace buzzingpixel\tests\adapters\MailGunSendMailAdapter;
+namespace buzzingpixel\tests\adapters\MandrillSendMailAdapter;
 
-use buzzingpixel\corbomitemailer\adapters\MailGunSendMailAdapter;
+use buzzingpixel\corbomitemailer\adapters\MandrillSendMailAdapter;
 use buzzingpixel\corbomitemailer\exceptions\InvalidEmailModelException;
 use buzzingpixel\corbomitemailer\factories\Html2TextFactory;
 use buzzingpixel\corbomitemailer\interfaces\EmailModelInterface;
-use Mailgun\Mailgun;
+use Mandrill;
 use PHPUnit\Framework\TestCase;
 use Throwable;
 
-class EmailModelIsInvalidTest extends TestCase
+class EmailModelIsInvalidTestTest extends TestCase
 {
     /**
      * @throws Throwable
      */
     public function test() : void
     {
-        $mailgun = self::createMock(Mailgun::class);
+        $mandrill = self::createMock(Mandrill::class);
 
         $html2TextFactory = self::createMock(Html2TextFactory::class);
 
@@ -30,8 +30,8 @@ class EmailModelIsInvalidTest extends TestCase
             ->willReturn(false);
 
         /** @noinspection PhpParamsInspection */
-        $adapter = new MailGunSendMailAdapter(
-            $mailgun,
+        $adapter = new MandrillSendMailAdapter(
+            $mandrill,
             $html2TextFactory
         );
 

@@ -12,21 +12,14 @@ use Mailgun\Api\Message;
 use Mailgun\Mailgun;
 use PHPUnit\Framework\TestCase;
 use Throwable;
-use function putenv;
 
 class EmailModelIsValidTest extends TestCase
 {
     /**
      * @throws Throwable
      */
-    public function testSend() : void
+    public function test() : void
     {
-        putenv('WEBMASTER_NAME=testWebmasterName');
-
-        putenv('WEBMASTER_EMAIL_ADDRESS=testWebmasterEmailAddress');
-
-        putenv('MAILGUN_DOMAIN=testMailgunDomain');
-
         $mailGunMessage = self::createMock(Message::class);
 
         $mailGunMessage->expects(self::once())
