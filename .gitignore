@@ -12,6 +12,8 @@
 # Tools
 #------------------------------------
 
+.php_cs.cache
+.phpunit.result.cache
 /*-workspace
 /.env
 /node_modules

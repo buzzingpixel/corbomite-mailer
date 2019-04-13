@@ -1,11 +1,6 @@
 <?php
-declare(strict_types=1);
 
-/**
- * @author TJ Draper <tj@buzzingpixel.com>
- * @copyright 2019 BuzzingPixel, LLC
- * @license Apache-2.0
- */
+declare(strict_types=1);
 
 namespace buzzingpixel\corbomitemailer\models;
 
@@ -13,6 +8,9 @@ use buzzingpixel\corbomitemailer\interfaces\EmailModelInterface;
 
 class EmailModel implements EmailModelInterface
 {
+    /**
+     * @param mixed[] $props
+     */
     public function __construct(array $props = [])
     {
         foreach ($props as $key => $val) {
@@ -20,56 +18,63 @@ class EmailModel implements EmailModelInterface
         }
     }
 
+    /** @var string */
     private $fromName = '';
 
-    public function fromName(?string $fromName = null): string
+    public function fromName(?string $fromName = null) : string
     {
-        return $this->fromName = $fromName !== null ? $fromName : $this->fromName;
+        return $this->fromName = $fromName ?? $this->fromName;
     }
 
+    /** @var string */
     private $fromEmail = '';
 
-    public function fromEmail(?string $fromEmail = null): string
+    public function fromEmail(?string $fromEmail = null) : string
     {
-        return $this->fromEmail = $fromEmail !== null ? $fromEmail : $this->fromEmail;
+        return $this->fromEmail = $fromEmail ?? $this->fromEmail;
     }
 
+    /** @var string */
     private $toName = '';
 
-    public function toName(?string $toName = null): string
+    public function toName(?string $toName = null) : string
     {
-        return $this->toName = $toName !== null ? $toName : $this->toName;
+        return $this->toName = $toName ?? $this->toName;
     }
 
+    /** @var string */
     private $toEmail = '';
 
-    public function toEmail(?string $toEmail = null): string
+    public function toEmail(?string $toEmail = null) : string
     {
-        return $this->toEmail = $toEmail !== null ? $toEmail : $this->toEmail;
+        return $this->toEmail = $toEmail ?? $this->toEmail;
     }
 
+    /** @var string */
     private $subject = '';
 
-    public function subject(?string $subject = null): string
+    public function subject(?string $subject = null) : string
     {
-        return $this->subject = $subject !== null ? $subject : $this->subject;
+        return $this->subject = $subject ?? $this->subject;
     }
 
+    /** @var string */
     private $messagePlainText = '';
 
-    public function messagePlainText(?string $messagePlainText = null): string
+    public function messagePlainText(?string $messagePlainText = null) : string
     {
-        return $this->messagePlainText = $messagePlainText !== null ? $messagePlainText : $this->messagePlainText;
+        return $this->messagePlainText = $messagePlainText ?? $this->messagePlainText;
     }
 
+    /** @var string */
     private $messageHtml = '';
 
-    public function messageHtml(?string $messageHtml = null): string
+    public function messageHtml(?string $messageHtml = null) : string
     {
-        return $this->messageHtml = $messageHtml !== null ? $messageHtml : $this->messageHtml;
+        return $this->messageHtml = $messageHtml ?? $this->messageHtml;
     }
 
-    public function isValid(): bool
+    public function isValid() : bool
     {
         if (! $this->toEmail() ||
             ! $this->subject()
@@ -77,10 +82,6 @@ class EmailModel implements EmailModelInterface
             return false;
         }
 
-        if (! $this->messagePlainText() && ! $this->messageHtml()) {
-            return false;
-        }
-
-        return true;
+        return $this->messagePlainText() || $this->messageHtml();
     }
 }

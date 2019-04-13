@@ -1,50 +1,46 @@
 <?php
-declare(strict_types=1);
 
-/**
- * @author TJ Draper <tj@buzzingpixel.com>
- * @copyright 2019 BuzzingPixel, LLC
- * @license Apache-2.0
- */
+declare(strict_types=1);
 
 namespace buzzingpixel\corbomitemailer;
 
-use corbomite\di\Di;
-use buzzingpixel\corbomitemailer\models\EmailModel;
 use buzzingpixel\corbomitemailer\interfaces\EmailApiInterface;
 use buzzingpixel\corbomitemailer\interfaces\EmailModelInterface;
-use buzzingpixel\corbomitemailer\services\AddEmailToQueueService;
 use buzzingpixel\corbomitemailer\interfaces\SendMailAdapterInterface;
+use buzzingpixel\corbomitemailer\models\EmailModel;
+use buzzingpixel\corbomitemailer\services\AddEmailToQueueService;
+use Psr\Container\ContainerInterface;
+use function getenv;
 
 class EmailApi implements EmailApiInterface
 {
+    /** @var ContainerInterface */
     private $di;
 
-    public function __construct(Di $di)
+    public function __construct(ContainerInterface $di)
     {
         $this->di = $di;
     }
 
-    public function createEmailModel(array $props = []): EmailModelInterface
+    /**
+     * @param mixed[] $props
+     */
+    public function createEmailModel(array $props = []) : EmailModelInterface
     {
         return new EmailModel($props);
     }
 
-    public function addEmailToQueue(EmailModelInterface $emailModel)
+    public function addEmailToQueue(EmailModelInterface $emailModel) : void
     {
-        /** @noinspection PhpUnhandledExceptionInspection */
-        $this->di->getFromDefinition(AddEmailToQueueService::class)->add(
+        $this->di->get(AddEmailToQueueService::class)->add(
             $emailModel
         );
     }
 
-    public function sendEmail(EmailModelInterface $emailModel)
+    public function sendEmail(EmailModelInterface $emailModel) : void
     {
-        /** @noinspection PhpUnhandledExceptionInspection */
         /** @var SendMailAdapterInterface $adapter */
-        $adapter = $this->di->makeFromDefinition(
-            getenv('CORBOMITE_MAILER_ADAPTER_CLASS')
-        );
+        $adapter = $this->di->get(getenv('CORBOMITE_MAILER_ADAPTER_CLASS'));
         $adapter->send($emailModel);
     }
 }
